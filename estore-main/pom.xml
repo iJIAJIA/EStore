@@ -41,5 +41,6 @@
   	<module>estore-web</module>
   	<module>estore-resources</module>
     <module>estore-service</module>
+    <module>estore-dao</module>
   </modules>
 </project>
