@@ -39,6 +39,5 @@
   </build>
   <modules>
   	<module>estore-web</module>
-  	<module>estore-resources</module>
   </modules>
 </project>
