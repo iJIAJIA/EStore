@@ -42,5 +42,6 @@
   	<module>estore-resources</module>
     <module>estore-service</module>
     <module>estore-dao</module>
+    <module>estore-util</module>
   </modules>
 </project>
