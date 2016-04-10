@@ -6,10 +6,9 @@
     <groupId>ijiajia.EStore</groupId>
     <artifactId>estore-main</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>ijiajia.EStore</groupId>
   <artifactId>estore-web</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>estore-web</name>
   <packaging>war</packaging>
   <url>http://maven.apache.org</url>
@@ -17,20 +16,79 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>4.0.5.RELEASE</version>
+    </dependency>
+
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
+		<scope>provided</scope>
+	</dependency>
+	
+	<dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.3.3</version>
+      <scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>ijiajia.EStore</groupId>
+		<artifactId>estore-service</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-beanutils</groupId>
+		<artifactId>commons-beanutils</artifactId>
+	</dependency>
   </dependencies>
   
   <build>
-
-  <plugins>
-  	<plugin>
-  		<groupId>org.apache.maven.plugins</groupId>
-  		<artifactId>maven-war-plugin</artifactId>
-  		<version>2.2</version>
-  		<configuration>
-  			<warName>EStore</warName>
-  		</configuration>
-  	</plugin>
-  </plugins>
+	<finalName>estore</finalName>
+	<resources>
+		<resource>
+			<directory>src/main/resources/properties</directory>
+			<!--<targetPath></targetPath> 默认为classes路径 -->
+		</resource>
+		<resource>
+			<directory>src/main/resources/xml</directory>
+		</resource>
+	</resources>
+	 <plugins>
+	 	
+		 <plugin>
+	 		<groupId>org.apache.maven.plugins</groupId>
+	 		<artifactId>maven-war-plugin</artifactId>
+	 		<version>2.2</version>
+	 		<configuration>
+	 			<warName>estore</warName>
+	 		</configuration>
+	 	</plugin>
+	 	<plugin>
+		    <groupId>org.apache.tomcat.maven</groupId>
+		    <artifactId>tomcat7-maven-plugin</artifactId>
+		    <version>2.2</version>
+		    <configuration>
+		        <server>tomcat7.study</server>  <!-- 对应maven setting.xml中的server id = tomcat6 -->
+		        <url>http://localhost/manager/text</url>    
+		        <path>/estore</path>    <!-- 项目访问路径Root -->
+		        <port>80</port>    
+		        <ajpPort>7009</ajpPort>
+		    </configuration>
+		</plugin>
+	 	<plugin>
+	 		<groupId>org.apache.maven.plugins</groupId>
+	 		<artifactId>maven-compiler-plugin</artifactId>
+	 		<version>2.5.1</version>
+	 		<configuration>
+	 			<excludes>
+	 				<exclude>**/webappInitializer/*</exclude>
+	 			</excludes>
+	 		</configuration>
+	 	</plugin>
+	 </plugins>
   </build>
 </project>
