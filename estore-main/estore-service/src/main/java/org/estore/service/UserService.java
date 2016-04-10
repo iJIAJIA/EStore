@@ -26,4 +26,13 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean activateUser(UserSimpleInfo userInfo);
+	
+	
+	/**
+	 * 根据用户名和密码获取用户信息
+	 * @param userName
+	 * @param password
+	 * @return null or UserSimpleInfo
+	 */
+	public UserSimpleInfo findLoginUser(String userName,String password);
 }
