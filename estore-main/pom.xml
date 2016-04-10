@@ -7,21 +7,52 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>estore-main</name>
+  <name>estore</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <log4j.version>1.2.14</log4j.version>
+    <slf4j.version>1.5.8</slf4j.version>
+    
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+ 	 <dependencies>
+	    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>4.10</version>
+	      <scope>test</scope>
+	    </dependency>
+	    <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>	
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+	</dependencies>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+  	</dependencies>
+  </dependencyManagement>
   
   <build>
   	
@@ -33,6 +64,7 @@
 	  		<configuration>
 	 			<target>1.7</target>
 	 			<source>1.7</source>
+	 			<encoding>UTF-8</encoding>
 	  		</configuration>
 	  	</plugin>  	
   	</plugins>
@@ -42,6 +74,6 @@
   	<module>estore-resources</module>
     <module>estore-service</module>
     <module>estore-dao</module>
-    <module>estore-util</module>
+    <module>estore-common</module>
   </modules>
 </project>
