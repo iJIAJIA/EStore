@@ -9,6 +9,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/mvc
                     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <context:component-scan base-package="org.estore.web.controller"/>
+    
 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<bean id="myJsonMessageConverter"
@@ -16,4 +17,12 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="synchronizeOnSession" value="true"/>
+	</bean>
+	<bean id="viewResolver"
+    	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix" value="/WEB-INF/jsp/"></property>
+   		<property name="suffix" value=".jsp"></property>
+	</bean>
 </beans>
