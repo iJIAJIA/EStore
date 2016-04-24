@@ -13,8 +13,6 @@ public class UserSimpleInfo {
 	
 	private String email;
 	
-	private String mobile;
-	
 	private UserRole role;
 	
 	private Date createTime;
@@ -66,14 +64,6 @@ public class UserSimpleInfo {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
 	}
 
 	public UserRole getRole() {
