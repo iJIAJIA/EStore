@@ -11,14 +11,14 @@ public interface UserDao {
 	 * @param params
 	 * @return
 	 */
-	public User findLoginUser(Map<String,Object> params);
+	public User findUser(Map<String,Object> params);
 	
 	/**
-	 * 保存用户信息
+	 * 保存用户信息,用户Id在插入成功后会赋值到给定user的id字段上
 	 * @param user
-	 * @return 用户Id
+	 * @return 操作行数
 	 */
-	public int saveUser(User user);
+	public int insertUser(User user);
 	
 	/**
 	 * 更新用户信息

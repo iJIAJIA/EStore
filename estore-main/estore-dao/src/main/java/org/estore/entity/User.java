@@ -19,15 +19,15 @@ public class User {
 	
 	private String email;
 	
-	private int role;
+	private Integer role;
 	
 	private Date createTime;
 	
 	private Date updateTime;
 	
-	private int state;
+	private Integer state;
 	
-	private int activateWay;
+	private Integer activateWay;
 	
 	private String activeCode;
 
@@ -35,81 +35,121 @@ public class User {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	public String getUserName() {
 		return userName;
 	}
 
+
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public int getRole() {
+
+
+	public Integer getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+
+
+	public void setRole(Integer role) {
 		this.role = role;
 	}
+
+
 
 	public Date getCreateTime() {
 		return createTime;
 	}
 
+
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+
+
 
 	public Date getUpdateTime() {
 		return updateTime;
 	}
 
+
+
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
-	public int getState() {
+
+
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+
+
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
-	public int getActivateWay() {
+
+
+	public Integer getActivateWay() {
 		return activateWay;
 	}
 
-	public void setActivateWay(int activateWay) {
+
+
+	public void setActivateWay(Integer activateWay) {
 		this.activateWay = activateWay;
 	}
+
+
 
 	public String getActiveCode() {
 		return activeCode;
 	}
 
+
+
 	public void setActiveCode(String activeCode) {
 		this.activeCode = activeCode;
 	}
+
+
 
 	@Override
 	public String toString() {
