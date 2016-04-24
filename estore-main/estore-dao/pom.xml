@@ -18,6 +18,7 @@
     <dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
+		<scope>provided</scope>
 	</dependency>
     <dependency>
     	<groupId>org.mybatis</groupId>
@@ -31,13 +32,33 @@
     	<groupId>ijiajia.EStore</groupId>
     	<artifactId>estore-common</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+		<groupId>c3p0</groupId>
+		<artifactId>c3p0</artifactId>
+		<scope>provided</scope>
+	</dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-aop</artifactId>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.mybatis</groupId>
+    	<artifactId>mybatis-spring</artifactId>
     </dependency>
   </dependencies>
   <build>
   	<resources>
   		<resource>
   			<directory>src/main/resources/mapper</directory>
-  			<targetPath>org/estore/dao/mapper</targetPath>
+  			<targetPath>org/estore/dao</targetPath>
   		</resource>
   	</resources>
   	<testResources>

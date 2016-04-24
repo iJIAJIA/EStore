@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans   
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 加载配置文件 -->
+	<bean id="estorePropConfigurer"  
+        class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="order" value="1"/> 
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="location" value="classpath:database.properties"/>
+	</bean>  
+	<!-- 配置数据库连接 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${db_driver}"/>
+		<property name="jdbcUrl" value="${db_url}"/>
+		<property name="user" value="${db_username}"/>
+		<property name="password" value="${db_password}"/>
+	</bean>
+	<!--  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:org/estore/dao/*.xml" />
+	</bean>
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- MapperScannerConfigurer将会创建MapperFactoryBean，
+		之后自动装配,被自动装配的Bean 的id默认采用映射器的非大写的非完全限定类名 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.estore.dao" />
+	</bean>
+</beans>
