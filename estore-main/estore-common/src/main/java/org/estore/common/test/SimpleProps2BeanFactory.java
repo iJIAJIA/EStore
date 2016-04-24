@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * 将Properties数据赋值给指定的bean类的基本数据类型字段
  * 约定:
  * 	1,Properties文件以"#"开头,以","为间隔标明需要赋值的Bean字段
- * 	2,该字段在Bean中必须存在,且为基本数据类型
+ * 	2,该字段在Bean中必须存在,且为基本数据类型或者字符串
  * 	3,该字段有相对应的set方法
  * 	4,如果想插入空值,则以空格代替该位置
  * @author iJIAJIA
@@ -95,7 +95,14 @@ public class SimpleProps2BeanFactory {
 		}
 		for(int i = 0;i<values.length;i++){
 			Class type = this.fieldType.get(i);
-			Object value = ReflectUtils.parseString2PrimitiveDataType(values[i], type);
+			Object value = null;
+			if(type == String.class){
+				if(!StringUtils.isBlank(values[i])){
+					value = values[i];
+				}
+			}else{
+				value = ReflectUtils.parseString2PrimitiveDataType(values[i], type);				
+			}
 			if(value != null){
 				Method method = this.cacheMethods.get(i);
 				method.invoke(target, value);				

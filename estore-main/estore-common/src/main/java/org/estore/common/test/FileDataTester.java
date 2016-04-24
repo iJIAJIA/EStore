@@ -24,6 +24,18 @@ public class FileDataTester {
 	private String filePath;
 	
 	
+	
+	
+	public FileDataTester(FileTestTask task, String filePath) {
+		super();
+		this.task = task;
+		this.filePath = filePath;
+	}
+
+	public FileDataTester() {
+		
+	}
+
 	public String getFilePath() {
 		return filePath;
 	}
@@ -40,29 +52,18 @@ public class FileDataTester {
 		this.task = task;
 	}
 	
-	public void runTest(){
+	public void runTest() throws Exception{
 		File file = new File(filePath);
 		BufferedReader reader = null;
-		try {
-			if(task == null){
-				return ;
-			}
-			reader = new BufferedReader(
-					new FileReader(file));
-			String line = null;
-			while((line = reader.readLine()) != null){
-				task.runTestTask(line);
-			}
-		} catch (FileNotFoundException e) {
-			logger.error(e.getMessage());
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-		}finally{
-			try {
-				reader.close();
-			} catch (IOException e) {
-				logger.error(e.getMessage());
-			}
+		if(task == null){
+			return ;
 		}
+		reader = new BufferedReader(
+				new FileReader(file));
+		String line = null;
+		while((line = reader.readLine()) != null){
+			task.runTestTask(line);
+		}
+		reader.close();
 	}
 }

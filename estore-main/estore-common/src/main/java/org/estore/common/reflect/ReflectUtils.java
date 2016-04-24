@@ -26,9 +26,6 @@ public class ReflectUtils {
 	 */
 	public static Object parseString2PrimitiveDataType(String value,Class type){
 		Object result = null;
-		if(type == String.class){
-			return value;
-		}
 		if(StringUtils.isBlank(value)){
 			return null;
 		}
