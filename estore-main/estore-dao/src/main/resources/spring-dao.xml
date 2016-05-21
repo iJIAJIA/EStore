@@ -9,7 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
         class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="order" value="1"/> 
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
-        <property name="location" value="classpath:database.properties"/>
+        <property name="location" value="classpath:config/database.properties"/>
 	</bean>  
 	<!-- 配置数据库连接 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">

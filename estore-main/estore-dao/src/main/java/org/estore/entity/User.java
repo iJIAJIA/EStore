@@ -1,18 +1,10 @@
 package org.estore.entity;
 
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-@Table(name="USER")
 public class User {
 	
-	@Id
-	@Column(name="ID")
 	private Long id;
 	
-	@Column(name="USERNAME")
 	private String userName;
 	
 	private String password;

@@ -7,23 +7,21 @@
 	<select id="findUser" resultType="org.estore.entity.User">
 		SELECT * FROM USER
 		<where>
-			<choose>
-				<when test="state != null">
-					state = #{state}
-				</when>
-				<when test="userName != null">
-					userName = #{userName}
-				</when>
-				<when test="password != null">
-					password = #{password}
-				</when>
-				<when test="role != null">
-					role = #{role}
-				</when>
-				<otherwise>
-					id = #{id}
-				</otherwise>
-			</choose>
+			<if test="state != null">
+				AND state = #{state}
+			</if>
+			<if test="userName != null">
+				AND userName = #{userName}
+			</if>
+			<if test="password != null">
+				AND password = #{password}
+			</if>
+			<if test="role != null">
+				AND role = #{role}
+			</if>
+			<if test="id != null">
+				AND id = #{id}
+			</if>
 		</where>
 	</select>
 	
