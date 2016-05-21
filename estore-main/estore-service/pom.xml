@@ -7,14 +7,47 @@
     <artifactId>estore-main</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>ijiajia.EStore</groupId>
   <artifactId>estore-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>estore-service</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <estore.dao.version>0.0.1-SNAPSHOT</estore.dao.version>
   </properties>
   <dependencies>
+	 <dependency>
+	 	<groupId>ijiajia.EStore</groupId>
+	 	<artifactId>estore-dao</artifactId>
+	 	<version>${estore.dao.version}</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>ijiajia.EStore</groupId>
+	 	<artifactId>estore-common</artifactId>
+	 	<version>0.0.1-SNAPSHOT</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-core</artifactId>
+	 </dependency>
+	 <dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	 </dependency>
+	 <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-beans</artifactId>
+	 </dependency>
   </dependencies>
+  <build>
+  	<resources>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  			<targetPath>config</targetPath>
+  		</resource>
+  	</resources>
+  </build>
 </project>

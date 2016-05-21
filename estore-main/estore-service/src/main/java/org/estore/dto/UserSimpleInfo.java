@@ -125,6 +125,23 @@ public class UserSimpleInfo {
 		private UserRole(int roleCode) {
 			this.roleCode = roleCode;
 		}
+		
+		public static UserRole getUserRole(int roleCode){
+			
+			UserRole role = null;
+			switch(roleCode){
+			case 1:
+				role = UserRole.CUSTOMER;
+				break;
+			case 2:
+				role = UserRole.MERCHANT;
+				break;
+			case 3:
+				role = UserRole.ADMINSTRATOR;
+				break;
+			}
+			return role;
+		}
 	}
 	
 	public enum UserState{
@@ -139,6 +156,18 @@ public class UserSimpleInfo {
 			return stateCode;
 		}
 		
+		public static UserState getUserState(int stateCode){
+			UserState state = null;
+			switch(stateCode){
+			case 0:
+				state = UserState.NON_ACTIVATED;
+				break;
+			case 1:
+				state = UserState.ACTIVATED;
+				break;
+			}
+			return state;
+		}
 	}
 	
 	public enum ActivateType{
@@ -153,6 +182,27 @@ public class UserSimpleInfo {
 			return typeCode;
 		}
 		
+		public static ActivateType getActiveType(int typeCode){
+			ActivateType activeType = null;
+			switch(typeCode){
+			case 0:
+				activeType = ActivateType.BY_EMAIL;
+				break;
+			}
+			return activeType;
+		}
 		
 	}
+
+	@Override
+	public String toString() {
+		return "UserSimpleInfo [id=" + id + ", userName=" + userName
+				+ ", password=" + password + ", nickName=" + nickName
+				+ ", email=" + email + ", role=" + role + ", createTime="
+				+ createTime + ", updateTime=" + updateTime + ", state="
+				+ state + ", activateType=" + activateType + ", activeCode="
+				+ activeCode + "]";
+	}
+	
+	
 }

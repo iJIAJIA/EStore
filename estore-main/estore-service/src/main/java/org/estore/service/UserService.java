@@ -2,6 +2,7 @@ package org.estore.service;
 
 import java.util.Map;
 
+import org.estore.common.exception.ProcessException;
 import org.estore.dto.UserSimpleInfo;
 
 public interface UserService {
@@ -11,21 +12,21 @@ public interface UserService {
 	 * @param params
 	 * @return true if user exited false not a user
 	 */
-	public UserSimpleInfo findUserInfo(Map<String,Object> params);
+	public UserSimpleInfo findUserInfo(Map<String,Object> params) throws ProcessException;
 	
 	/**
 	 * 注册用户
 	 * @param userInfo
 	 * @return
 	 */
-	public UserSimpleInfo registerUser(UserSimpleInfo userInfo);
+	public UserSimpleInfo registerUser(UserSimpleInfo userInfo) throws ProcessException;
 	
 	/**
 	 * 激活用户
 	 * @param userInfo
 	 * @return
 	 */
-	public boolean activateUser(UserSimpleInfo userInfo);
+	public boolean activateUser(UserSimpleInfo userInfo) throws ProcessException;
 	
 	
 	/**
@@ -34,5 +35,5 @@ public interface UserService {
 	 * @param password
 	 * @return null or UserSimpleInfo
 	 */
-	public UserSimpleInfo findLoginUser(String userName,String password);
+	public UserSimpleInfo findLoginUser(String userName,String password) throws ProcessException;
 }
