@@ -20,7 +20,6 @@
     <dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-webmvc</artifactId>
-		<version>4.0.5.RELEASE</version>
     </dependency>
 	
 	<dependency>
@@ -49,10 +48,6 @@
 		<groupId>ijiajia.EStore</groupId>
 		<artifactId>estore-common</artifactId>
 		<version>${estore.common.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-beanutils</groupId>
-		<artifactId>commons-beanutils</artifactId>
 	</dependency>
   </dependencies>
   
