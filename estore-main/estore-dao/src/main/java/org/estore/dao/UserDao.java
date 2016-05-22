@@ -1,5 +1,6 @@
 package org.estore.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.estore.entity.User;
@@ -11,7 +12,7 @@ public interface UserDao {
 	 * @param params
 	 * @return
 	 */
-	public User findUser(Map<String,Object> params);
+	public List<User> findUser(Map<String,Object> params);
 	
 	/**
 	 * 保存用户信息,用户Id在插入成功后会赋值到给定user的id字段上

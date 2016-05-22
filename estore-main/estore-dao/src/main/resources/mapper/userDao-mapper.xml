@@ -7,6 +7,7 @@
 	<select id="findUser" resultType="org.estore.entity.User">
 		SELECT * FROM USER
 		<where>
+			1 = 1
 			<if test="state != null">
 				AND state = #{state}
 			</if>
@@ -19,6 +20,9 @@
 			<if test="role != null">
 				AND role = #{role}
 			</if>
+			<if test="email != null">
+				AND email = #{email}
+			</if>
 			<if test="id != null">
 				AND id = #{id}
 			</if>
@@ -27,9 +31,9 @@
 	
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO USER
-			(userName,password,email,role,createTime,state)
+			(userName,password,email,role,createTime,state,activateWay,activeCode)
 		VALUES
-			(#{userName},#{password},#{email},#{role},#{createTime},#{state})
+			(#{userName},#{password},#{email},#{role},#{createTime},#{state},#{activateWay},#{activeCode})
 	</insert>
 	
 	<update id="updateUser">
