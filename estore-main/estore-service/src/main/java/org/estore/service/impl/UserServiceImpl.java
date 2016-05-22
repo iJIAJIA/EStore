@@ -1,9 +1,14 @@
 package org.estore.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.estore.common.exception.ProcessException;
+import org.estore.common.secure.ActivatecodeUtils;
+import org.estore.common.secure.MD5Utils;
 import org.estore.dao.UserDao;
 import org.estore.dto.UserSimpleInfo;
 import org.estore.dto.UserSimpleInfo.ActivateType;
@@ -30,40 +35,50 @@ public class UserServiceImpl implements UserService {
 		Map<String,Object> queryParams = new HashMap<String, Object>();
 		queryParams.put("userName", userName);
 		queryParams.put("password", password);
-		return findUserInfo(queryParams);
-	}
-
-
-	@Override
-	public UserSimpleInfo findUserInfo(Map<String, Object> params)
-			throws ProcessException {
-		User user = userDao.findUser(params);
-		UserSimpleInfo userSimpleInfo = null;
-		if(user != null){
-			userSimpleInfo = new UserSimpleInfo();
-			BeanUtils.copyProperties(user, userSimpleInfo, "state","role");
-			userSimpleInfo.setState(UserState.getUserState(user.getState()));
-			userSimpleInfo.setRole(UserRole.getUserRole(user.getRole()));
-			userSimpleInfo.setActivateType(ActivateType.getActiveType(user.getActivateWay()));			
+		List<UserSimpleInfo> infoList = findUserInfo(queryParams);
+		UserSimpleInfo info = null;
+		if(infoList != null && infoList.size() > 0){
+			info = infoList.get(0);
 		}
-		return userSimpleInfo;
+		return info;
 	}
 
 
 	@Override
-	public UserSimpleInfo registerUser(UserSimpleInfo userInfo)
+	public List<UserSimpleInfo> findUserInfo(Map<String, Object> params)
+			throws ProcessException {
+		List<User> userList = userDao.findUser(params);
+		List<UserSimpleInfo> userSimpleInfoList = null;
+		if(userList != null && userList.size() > 0){
+			userSimpleInfoList = new ArrayList<UserSimpleInfo>();
+			for(User user: userList){
+				UserSimpleInfo userSimpleInfo = new UserSimpleInfo();
+				BeanUtils.copyProperties(userList, userSimpleInfoList, "state","role");
+				userSimpleInfo.setState(UserState.getUserState(user.getState()));
+				userSimpleInfo.setRole(UserRole.getUserRole(user.getRole()));
+				userSimpleInfo.setActivateType(ActivateType.getActiveType(user.getActivateWay()));		
+				userSimpleInfoList.add(userSimpleInfo);
+			}
+		}
+		return userSimpleInfoList;
+	}
+
+
+	@Override
+	public UserSimpleInfo registerCustomer(UserSimpleInfo userInfo)
 			throws ProcessException {
 		if(userInfo == null){
 			throw new ProcessException("用户信息不能为空");
 		}
 		User user = new User();
-		BeanUtils.copyProperties(userInfo, user,"state","role");
-		user.setActivateWay(
-				userInfo.getActivateType() == null? null: userInfo.getActivateType().getTypeCode());
-		user.setRole(
-				userInfo.getRole() == null? null: userInfo.getRole().getRoleCode());
-		user.setState(
-				userInfo.getState() == null? null: userInfo.getState().getStateCode());
+		user.setUserName(userInfo.getUserName());
+		user.setPassword(MD5Utils.md5(userInfo.getPassword()));
+		user.setEmail(userInfo.getEmail());
+		user.setActivateWay(ActivateType.BY_EMAIL.getTypeCode());
+		user.setRole(UserRole.CUSTOMER.getRoleCode());
+		user.setState(UserState.NON_ACTIVATED.getStateCode());
+		user.setActiveCode(ActivatecodeUtils.generateActivatecode());
+		user.setCreateTime(new Date());
 		int insertRows = userDao.insertUser(user);
 		if(insertRows == 1){
 			userInfo.setId(user.getId());
@@ -78,6 +93,34 @@ public class UserServiceImpl implements UserService {
 			throws ProcessException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public UserSimpleInfo findUserInfoByEmail(String email)
+			throws ProcessException {
+		Map<String,Object> queryParams = new HashMap<String, Object>();
+		queryParams.put("email", email);
+		List<UserSimpleInfo> infoList = findUserInfo(queryParams);
+		UserSimpleInfo info = null;
+		if(infoList != null && infoList.size() > 0){
+			info = infoList.get(0);
+		}
+		return info;
+	}
+
+
+	@Override
+	public UserSimpleInfo findUserInfoByUserName(String userName)
+			throws ProcessException {
+		Map<String,Object> queryParams = new HashMap<String, Object>();
+		queryParams.put("userName", userName);
+		List<UserSimpleInfo> infoList = findUserInfo(queryParams);
+		UserSimpleInfo info = null;
+		if(infoList != null && infoList.size() > 0){
+			info = infoList.get(0);
+		}
+		return info;
 	}
 	
 	
