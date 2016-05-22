@@ -10,7 +10,7 @@ public class ReturnJsonResult {
 	
 	private String returnMsg;
 	
-	private Object returnObject;
+	private Object returnData;
 
 	public String getReturnCode() {
 		return returnCode;
@@ -28,18 +28,20 @@ public class ReturnJsonResult {
 		this.returnMsg = returnMsg;
 	}
 
-	public Object getReturnObject() {
-		return returnObject;
+	
+	public Object getReturnData() {
+		return returnData;
 	}
 
-	public void setReturnObject(Object returnObject) {
-		this.returnObject = returnObject;
+	public void setReturnData(Object returnData) {
+		this.returnData = returnData;
 	}
 
 	@Override
 	public String toString() {
 		return "ReturnJsonResult [returnCode=" + returnCode + ", returnMsg="
-				+ returnMsg + ", returnObject=" + returnObject + "]";
+				+ returnMsg + ", returnData=" + returnData + "]";
 	}
+
 	
 }

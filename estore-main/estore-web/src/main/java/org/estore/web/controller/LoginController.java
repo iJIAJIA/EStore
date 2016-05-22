@@ -9,7 +9,7 @@ import org.estore.common.exception.ProcessException;
 import org.estore.common.secure.IdentityCodeUtils;
 import org.estore.dto.UserSimpleInfo;
 import org.estore.service.UserService;
-import org.estore.web.common.response.LoginResponseCode;
+import org.estore.web.common.response.LoginModelResponseCode;
 import org.estore.web.model.IdentityCode;
 import org.estore.web.model.ReturnJsonResult;
 import org.estore.web.model.user.UserLoginInfo;
@@ -47,7 +47,7 @@ public class LoginController {
 		ReturnJsonResult result = null;
 		if(!checkIdentityCode(loginInfo.getIdentifyingCode(),iCode)){
 //			TODO 发送验证码错误响应码
-			result = generateJsonResult(LoginResponseCode.LOGIN_WRONG_IDENTITY_CODE);
+			result = generateJsonResult(LoginModelResponseCode.LOGIN_WRONG_IDENTITY_CODE);
 		}
 //		2,获取登录用户信息
 		UserSimpleInfo userSimpleInfo = null;
@@ -55,17 +55,17 @@ public class LoginController {
 			userSimpleInfo = userService.findLoginUser(loginInfo.getUserName(), loginInfo.getPassword());
 		} catch (ProcessException e) {
 			logger.error("验证用户登录信息异常",e.getMessage());
-			result = generateJsonResult(LoginResponseCode.LOGIN_ERROR);
+			result = generateJsonResult(LoginModelResponseCode.LOGIN_ERROR);
 			return result;
 		}
 		logger.debug("userSimpleInfo: {}",userSimpleInfo);
 //		3.返回信息
 		if(userSimpleInfo == null){
 			logger.info("User's Login Info is null");
-			result = generateJsonResult(LoginResponseCode.LOGIN_WRONG_NAME_OR_PASSWORD);
+			result = generateJsonResult(LoginModelResponseCode.LOGIN_WRONG_NAME_OR_PASSWORD);
 		}else{
-			result = generateJsonResult(LoginResponseCode.LOGIN_SUCCESS);
-			result.setReturnObject(userSimpleInfo);
+			result = generateJsonResult(LoginModelResponseCode.LOGIN_SUCCESS);
+			result.setReturnData(userSimpleInfo);
 		}
 		logger.debug("ReturnJsonResult: {}",result);
 		return result;
@@ -99,8 +99,8 @@ public class LoginController {
 		session.setAttribute(LOGIN_IDENTITYCODE_NAME, iCode);
 		
 //		生成响应信息
-		ReturnJsonResult jsonResult = generateJsonResult(LoginResponseCode.AUTHCODE_SUCCESS);
-		jsonResult.setReturnObject(bImage);
+		ReturnJsonResult jsonResult = generateJsonResult(LoginModelResponseCode.AUTHCODE_SUCCESS);
+		jsonResult.setReturnData(bImage);
 		
 		return jsonResult;
 	}
@@ -120,7 +120,7 @@ public class LoginController {
 	 * @param respCode
 	 * @return
 	 */
-	private ReturnJsonResult generateJsonResult(LoginResponseCode respCode){
+	private ReturnJsonResult generateJsonResult(LoginModelResponseCode respCode){
 		if(respCode == null){
 			return null;
 		}
